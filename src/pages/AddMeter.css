@@ -1,0 +1,734 @@
+/* =========================================================
+   EBUDDY / NAMMA TNEB — ADD METER
+   Premium Mindblowing UI
+========================================================= */
+
+.add-meter-page {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      rgba(99, 102, 241, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 10%,
+      rgba(139, 92, 246, 0.10),
+      transparent 26%
+    ),
+    #f6f7fb;
+
+  color: #111827;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.add-meter-header {
+  height: 70px;
+
+  padding: 0 5%;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 20;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  border-bottom:
+    1px solid rgba(226, 232, 240, 0.75);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow:
+    0 8px 30px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+  border: none;
+  background: transparent;
+
+  color: #64748b;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  color: #4f46e5;
+  transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.add-meter-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-meter-logo {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed
+    );
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 8px 20px rgba(79, 70, 229, 0.25);
+}
+
+.add-meter-brand strong {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 850;
+
+  letter-spacing: -0.3px;
+}
+
+.add-meter-brand span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #94a3b8;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.add-meter-content {
+  width: 100%;
+
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  padding: 45px 20px 65px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.add-meter-title {
+  margin-bottom: 23px;
+}
+
+.add-meter-title > span {
+  color: #6366f1;
+
+  font-size: 9px;
+  font-weight: 850;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+.add-meter-title h1 {
+  margin: 7px 0 6px;
+
+  font-size: 30px;
+
+  line-height: 1.1;
+
+  font-weight: 850;
+
+  letter-spacing: -1px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #4f46e5,
+      #7c3aed
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+.add-meter-title p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.add-meter-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border:
+    1px solid rgba(226, 232, 240, 0.9);
+
+  border-radius: 18px;
+
+  padding: 27px;
+
+  box-shadow:
+    0 20px 55px rgba(15, 23, 42, 0.075),
+    0 4px 15px rgba(79, 70, 229, 0.035);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.add-meter-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  right: -85px;
+  top: -85px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(99, 102, 241, 0.07);
+
+  pointer-events: none;
+}
+
+.add-meter-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 110px;
+  height: 110px;
+
+  left: -70px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(139, 92, 246, 0.055);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+  margin-bottom: 18px;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.optional {
+  margin-left: 6px;
+
+  color: #94a3b8;
+
+  font-size: 8px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-wrapper {
+  min-height: 46px;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color: #94a3b8;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.input-wrapper:hover {
+  border-color: #c7d2fe;
+
+  background: #ffffff;
+}
+
+.input-wrapper:focus-within {
+  border-color: #818cf8;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.10),
+    0 8px 20px rgba(79, 70, 229, 0.055);
+
+  transform: translateY(-1px);
+}
+
+.input-wrapper input {
+  width: 100%;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #172033;
+
+  font-size: 12px;
+
+  font-weight: 550;
+}
+
+.input-wrapper input::placeholder {
+  color: #a0a8b5;
+
+  font-weight: 450;
+}
+
+.input-wrapper input[type="date"] {
+  cursor: pointer;
+
+  color: #172033;
+
+  min-height: 42px;
+}
+
+
+/* =========================================================
+   DATE INPUT
+========================================================= */
+
+.date-input-wrapper {
+  cursor: pointer;
+}
+
+.date-input-wrapper input[type="date"] {
+  width: 100%;
+
+  cursor: pointer;
+
+  color-scheme: light;
+}
+
+/* Chrome / Edge calendar icon */
+
+.date-input-wrapper
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+
+  margin-left: auto;
+}
+
+/* Make the calendar indicator visible */
+
+.date-input-wrapper
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.75;
+}
+
+.date-input-wrapper:focus-within {
+  border-color: #818cf8;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.10),
+    0 8px 20px rgba(79, 70, 229, 0.055);
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.add-meter-error {
+  margin-top: 5px;
+
+  margin-bottom: 15px;
+
+  padding: 11px 13px;
+
+  border-radius: 10px;
+
+  background: #fff1f2;
+
+  border:
+    1px solid #fecdd3;
+
+  color: #be123c;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  box-shadow:
+    0 8px 22px rgba(225, 29, 72, 0.055);
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.add-meter-success {
+  margin-top: 5px;
+
+  margin-bottom: 15px;
+
+  padding: 11px 13px;
+
+  border-radius: 10px;
+
+  background: #ecfdf5;
+
+  border:
+    1px solid #bbf7d0;
+
+  color: #15803d;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  box-shadow:
+    0 8px 22px rgba(22, 163, 74, 0.055);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.save-meter-button {
+  width: 100%;
+
+  min-height: 47px;
+
+  margin-top: 4px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5 0%,
+      #6366f1 45%,
+      #7c3aed 100%
+    );
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(79, 70, 229, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.save-meter-button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 15px 32px rgba(79, 70, 229, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.save-meter-button:active {
+  transform: translateY(0);
+}
+
+.save-meter-button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .add-meter-header {
+    height: 60px;
+
+    padding: 0 14px;
+  }
+
+  .back-button {
+    font-size: 10px;
+  }
+
+  .add-meter-logo {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 9px;
+  }
+
+  .add-meter-brand {
+    gap: 8px;
+  }
+
+  .add-meter-brand strong {
+    font-size: 12px;
+  }
+
+  .add-meter-brand span {
+    display: none;
+  }
+
+  .add-meter-content {
+    max-width: 100%;
+
+    padding: 27px 12px 42px;
+  }
+
+  .add-meter-title {
+    margin-bottom: 18px;
+  }
+
+  .add-meter-title > span {
+    font-size: 8px;
+  }
+
+  .add-meter-title h1 {
+    margin-top: 6px;
+
+    font-size: 24px;
+
+    letter-spacing: -0.7px;
+  }
+
+  .add-meter-title p {
+    font-size: 10px;
+  }
+
+  .add-meter-card {
+    padding: 18px 15px;
+
+    border-radius: 14px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    margin-bottom: 6px;
+
+    font-size: 9px;
+  }
+
+  .input-wrapper {
+    min-height: 43px;
+
+    border-radius: 10px;
+
+    padding: 0 10px;
+  }
+
+  .input-wrapper input {
+    font-size: 11px;
+  }
+
+  .input-wrapper input[type="date"] {
+    min-height: 39px;
+  }
+
+  .date-input-wrapper
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 17px;
+    height: 17px;
+  }
+
+  .input-wrapper > span {
+    font-size: 8px;
+  }
+
+  .add-meter-error,
+  .add-meter-success {
+    font-size: 9px;
+
+    padding: 10px 11px;
+  }
+
+  .save-meter-button {
+    min-height: 44px;
+
+    border-radius: 10px;
+
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .add-meter-header {
+    padding: 0 10px;
+  }
+
+  .add-meter-content {
+    padding: 23px 9px 35px;
+  }
+
+  .add-meter-title h1 {
+    font-size: 22px;
+  }
+
+  .add-meter-card {
+    padding: 16px 12px;
+  }
+
+  .input-wrapper {
+    min-height: 41px;
+  }
+
+  .input-wrapper input[type="date"] {
+    min-height: 37px;
+  }
+
+  .save-meter-button {
+    min-height: 42px;
+  }
+}
