@@ -66,14 +66,14 @@ button {
 }
 
 .sidebar-logo {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 54px;
   border-radius: 14px;
   display: grid;
   place-items: center;
   color: #fff;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  box-shadow: 0 12px 30px rgba(99,102,241,.32);
+  
+ 
 }
 
 .sidebar-brand h1 {
@@ -203,12 +203,13 @@ button {
   margin: 0 0 5px;
   font-family: "Space Grotesk", sans-serif;
   font-size: 27px;
+   color: #4780ea;
   letter-spacing: -1px;
 }
 
 .dashboard-header p {
   margin: 0;
-  color: #7d879a;
+  color: #08142b;
   font-size: 12px;
 }
 
@@ -856,10 +857,75 @@ button {
   letter-spacing: -.5px;
 }
 
+
+/* ---------- BILL BREAKDOWN TOGGLE ---------- */
+
+.bill-breakdown-toggle {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 12px;
+  border: 1px solid #e2e6f2;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8f8ff, #f5f7ff);
+  color: #343b55;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 4px 12px rgba(64, 70, 130, .06);
+}
+
+.bill-breakdown-toggle:hover {
+  border-color: #cfd4ff;
+  background: #f2f3ff;
+}
+
+.bill-breakdown-toggle.open {
+  border-color: #cdd1ff;
+  border-radius: 12px 12px 9px 9px;
+  background: #f1f2ff;
+}
+
+.bill-breakdown-toggle-left,
+.bill-breakdown-toggle-right {
+  display: flex;
+  align-items: center;
+}
+
+.bill-breakdown-toggle-left {
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bill-breakdown-toggle-left svg {
+  color: #5b5cf0;
+}
+
+.bill-breakdown-toggle-right {
+  gap: 7px;
+  color: #6d7488;
+}
+
+.bill-breakdown-toggle-right small {
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.bill-breakdown-toggle-right svg {
+  transition: transform .2s ease;
+}
+
+.bill-breakdown-toggle.open .bill-breakdown-toggle-right svg {
+  transform: rotate(180deg);
+}
+
 /* breakdown */
 
 .dashboard-bill-breakdown {
-  margin-top: 14px;
+  margin-top: 5px;
   padding: 14px;
   border: 1px solid #e5e9f1;
   border-radius: 15px;
@@ -1377,6 +1443,25 @@ button {
 }
 
 @media (max-width: 430px) {
+  .dashboard-header {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 7px;
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .mobile-menu-button,
+  .refresh-button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
   .summary-section {
     grid-template-columns: 1fr;
   }
@@ -1398,7 +1483,8 @@ button {
   }
 
   .dashboard-header {
-    padding-bottom: 17px;
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 
   .dashboard-header > div:first-child > p:last-child {
@@ -1419,6 +1505,708 @@ button {
   }
 
   .dashboard-bill-breakdown {
+    padding: 11px;
+  }
+}
+
+
+/* =========================================================
+   EBUDDY MOBILE REDESIGN
+   Keeps desktop UI unchanged.
+   ========================================================= */
+
+.mobile-menu-button,
+.mobile-menu-overlay {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dashboard-page {
+    position: relative;
+    display: block;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- MOBILE NAV ---------- */
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(82vw, 320px);
+    min-width: 0;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 18px 14px 16px;
+    transform: translateX(-105%);
+    transition: transform .28s cubic-bezier(.22,1,.36,1);
+    box-shadow: 18px 0 55px rgba(15,23,42,.28);
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .dashboard-page:has(.mobile-menu-button[aria-expanded="true"]) .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-brand {
+    padding: 2px 7px 22px;
+    gap: 11px;
+  }
+
+  .sidebar-logo {
+    padding-top: 40px;
+    width: 65px;
+    height: 98px;
+    
+  }
+
+  .sidebar-brand h1 {
+     padding-top: 128px;
+    font-size: 20px;
+  }
+
+  .sidebar-brand span {
+    font-size: 9px;
+  }
+
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .nav-item {
+    justify-content: flex-start;
+    min-height: 46px;
+    padding: 12px 13px;
+    border-radius: 12px;
+    font-size: 12px;
+    gap: 11px;
+  }
+
+  .nav-item svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .sidebar-bottom {
+    margin-top: auto;
+    gap: 12px;
+  }
+
+  .sidebar-tip {
+    display: flex;
+    font-size: 9px;
+  }
+
+  .sidebar .logout-button {
+    display: flex;
+    height: 48px;
+    min-height: 48px;
+    flex: none;
+    border-radius: 12px;
+    color: #fca5a5;
+    background: rgba(239,68,68,.07);
+    border-color: rgba(239,68,68,.18);
+    font-size: 12px;
+  }
+
+  .mobile-menu-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(8, 12, 24, .46);
+    backdrop-filter: blur(3px);
+    z-index: 900;
+  }
+
+  /* ---------- MOBILE HEADER ---------- */
+
+  .dashboard-main {
+    width: 100%;
+    max-width: none;
+    padding: 74px 13px 30px;
+  }
+
+  .dashboard-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: none;
+    box-sizing: border-box;
+    z-index: 1100;
+    min-height: 62px;
+    margin: 0;
+    padding: 9px 13px;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+    background: rgba(245,247,251,.96);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(226,231,240,.9);
+    box-shadow: 0 6px 20px rgba(31,41,55,.06);
+  }
+
+  .dashboard-header > div:first-child {
+    order: 2;
+    min-width: 0;
+  }
+
+  .dashboard-header h2 {
+    margin: 0 0 2px;
+    font-size: 21px;
+    line-height: 1.1;
+    letter-spacing: -.7px;
+    white-space: nowrap;
+  }
+
+  .dashboard-header p {
+    font-size: 10px;
+  }
+
+  .mobile-menu-button {
+    display: grid;
+    place-items: center;
+    order: 1;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border: 1px solid #dfe4ee;
+    border-radius: 12px;
+    color: #4f46e5;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 7px 20px rgba(31,41,55,.07);
+    transition: .2s ease;
+  }
+
+  .mobile-menu-button:active {
+    transform: scale(.94);
+  }
+
+  .header-actions {
+    margin-left: 0;
+    gap: 7px;
+    order: 3;
+    justify-self: end;
+  }
+
+  .refresh-button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .refresh-button span {
+    display: none;
+  }
+
+  .user-section {
+    gap: 0;
+  }
+
+  .user-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .user-details {
+    display: none;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .welcome-section {
+    margin: 17px 0 16px;
+    padding: 21px 18px;
+    border-radius: 20px;
+  }
+
+  .welcome-small {
+    font-size: 9px !important;
+  }
+
+  .welcome-section h1 {
+    font-size: 22px;
+    line-height: 1.18;
+  }
+
+  .welcome-section > div > p:last-child {
+    margin-top: 7px;
+    font-size: 10px;
+  }
+
+  .welcome-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .welcome-actions button {
+    width: 100%;
+    min-height: 43px;
+    justify-content: center;
+    padding: 10px 8px;
+    border-radius: 11px;
+    font-size: 10px;
+  }
+
+  /* ---------- SUMMARY ---------- */
+
+  .summary-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 27px;
+  }
+
+  .summary-card {
+    min-height: 94px;
+    padding: 12px;
+    gap: 9px;
+    border-radius: 14px;
+  }
+
+  .summary-icon {
+    width: 33px;
+    height: 33px;
+    border-radius: 10px;
+  }
+
+  .summary-card span {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  .summary-card strong {
+    margin-top: 6px;
+    font-size: 17px;
+  }
+
+  .summary-card strong small {
+    font-size: 8px;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+
+  .section-heading {
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+
+  .section-heading h2 {
+    font-size: 18px;
+  }
+
+  .section-heading p {
+    font-size: 9px;
+  }
+
+  .meter-count {
+    padding: 6px 8px;
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  /* ---------- METER CARDS ---------- */
+
+  .meter-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .meter-card {
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+    border-radius: 17px;
+  }
+
+  .meter-card-header {
+    margin-bottom: 0;
+  }
+
+  .meter-icon {
+    width: 37px;
+    height: 37px;
+    border-radius: 11px;
+  }
+
+  .meter-status {
+    padding: 5px 8px;
+    font-size: 8px;
+  }
+
+  .meter-card > h3 {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .meter-number {
+    font-size: 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .meter-reading {
+    margin-top: 13px;
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .meter-reading strong {
+    font-size: 27px;
+  }
+
+  .meter-usage {
+    margin: 10px 0;
+  }
+
+  .meter-usage > div {
+    min-width: 0;
+    padding: 11px 9px;
+  }
+
+  .meter-usage span {
+    font-size: 8px;
+  }
+
+  .meter-usage strong {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .meter-bill {
+    margin-top: 11px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .meter-bill strong {
+    font-size: 21px;
+  }
+
+  .free-unit-progress {
+    margin-top: 11px;
+    padding: 11px;
+    border-radius: 12px;
+  }
+
+  .dashboard-bill-breakdown {
+    margin-top: 11px;
+    padding: 11px;
+    border-radius: 13px;
+  }
+
+  .dashboard-breakdown-row {
+    gap: 10px;
+  }
+
+  .dashboard-breakdown-row > div {
+    min-width: 0;
+  }
+
+  .dashboard-breakdown-row > strong {
+    white-space: nowrap;
+  }
+
+  .meter-cycle-date {
+    margin-top: 11px;
+  }
+
+  .meter-card-actions {
+    gap: 7px;
+    margin-top: 11px;
+  }
+
+  .edit-meter-button,
+  .delete-meter-button,
+  .view-history-button {
+    min-height: 40px;
+    font-size: 9px;
+  }
+
+  /* ---------- RECENT READINGS AS MOBILE CARDS ---------- */
+
+  .recent-section {
+    margin-top: 30px;
+  }
+
+  .table-container {
+    overflow: visible;
+    border-radius: 14px;
+  }
+
+  .table-container table,
+  .table-container tbody {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table-container thead {
+    display: none;
+  }
+
+  .table-container tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px 12px;
+    padding: 13px;
+    border-top: 1px solid #edf0f4;
+  }
+
+  .table-container tbody tr:first-child {
+    border-top: 0;
+  }
+
+  .table-container td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    font-size: 9px;
+  }
+
+  .table-container td::before {
+    color: #9aa3b2;
+    font-size: 8px;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .table-container td:nth-child(1)::before { content: "Date"; }
+  .table-container td:nth-child(2)::before { content: "Meter"; }
+  .table-container td:nth-child(3)::before { content: "Reading"; }
+  .table-container td:nth-child(4)::before { content: "Usage"; }
+
+  .table-container td:nth-child(1),
+  .table-container td:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  .table-container td:nth-child(3),
+  .table-container td:nth-child(4) {
+    padding-top: 4px;
+  }
+
+  .table-container td strong,
+  .table-container td > span,
+  .table-container td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table-container td strong {
+    max-width: 110px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .usage-table-badge {
+    padding: 4px 6px;
+    font-size: 7px;
+    white-space: nowrap;
+  }
+
+  .table-unit {
+    font-size: 7px;
+  }
+
+  .view-all-button {
+    font-size: 9px;
+  }
+
+  /* ---------- EMPTY STATES ---------- */
+
+  .dashboard-empty,
+  .recent-empty {
+    padding: 36px 15px;
+    border-radius: 15px;
+  }
+
+  .dashboard-empty p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 430px) {
+  .dashboard-main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dashboard-header {
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dashboard-header h2 {
+    font-size: 19px;
+  }
+
+  .dashboard-header p {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-menu-button,
+  .refresh-button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .welcome-section {
+    padding: 18px 15px;
+    border-radius: 18px;
+  }
+
+  .welcome-section h1 {
+    font-size: 20px;
+  }
+
+  .welcome-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .welcome-actions button {
+    min-height: 41px;
+    font-size: 9px;
+  }
+
+  .summary-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summary-card {
+    min-height: 88px;
+    padding: 10px;
+  }
+
+  .summary-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .summary-card strong {
+    font-size: 16px;
+  }
+
+  .summary-card span {
+    font-size: 7px;
+  }
+
+  .meter-card {
+    padding: 13px;
+  }
+
+  .meter-reading strong {
+    font-size: 25px;
+  }
+
+  .meter-usage strong {
+    font-size: 10px;
+  }
+
+  .dashboard-breakdown-row span {
+    font-size: 7px;
+  }
+
+  .dashboard-breakdown-row strong {
+    font-size: 8px;
+  }
+
+  .meter-card-actions button,
+  .view-history-button {
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-main {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .dashboard-header {
+    margin-left: -8px;
+    margin-right: -8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .mobile-menu-button,
+  .refresh-button {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .welcome-section {
+    padding: 16px 13px;
+  }
+
+  .welcome-section h1 {
+    font-size: 18px;
+  }
+
+  .welcome-actions button {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 8px;
+  }
+
+  .summary-card {
+    gap: 7px;
+  }
+
+  .summary-card strong {
+    font-size: 15px;
+  }
+
+  .meter-card {
     padding: 11px;
   }
 }

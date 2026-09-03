@@ -14,6 +14,9 @@ import {
   RefreshCw,
   ReceiptText,
   CircleCheck,
+  ChevronDown,
+  Menu,
+  X,
 } from "lucide-react";
 
 import { auth } from "../firebase/firebase";
@@ -37,6 +40,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedBreakdowns, setExpandedBreakdowns] = useState({});
 
   // ==========================================
   // LOGOUT
@@ -44,6 +49,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
+      setMobileMenuOpen(false);
       await signOut(auth);
       navigate("/login");
     } catch (error) {
@@ -393,14 +399,17 @@ const Dashboard = () => {
         <div className="sidebar-brand">
 
           <div className="sidebar-logo">
-            <Zap
-              size={22}
-              fill="currentColor"
-            />
+            
+  <img
+    src="/tnebb.png"
+    alt="EBuddy Logo"
+    className="sidebar-logo"
+  />
+
           </div>
 
           <div>
-            <h1>EBuddy</h1>
+            <h1>TN-eBuddy</h1>
 
             <span>
               Smart EB Manager
@@ -415,8 +424,10 @@ const Dashboard = () => {
 
           <button
             className="nav-item active"
-            onClick={() =>
-              navigate("/dashboard")
+            onClick={() => {
+              navigate("/dashboard");
+              setMobileMenuOpen(false);
+            }
             }
           >
             <Gauge size={19} />
@@ -426,12 +437,14 @@ const Dashboard = () => {
 
           <button
             className="nav-item"
-            onClick={() =>
+            onClick={() => {
               document
                 .getElementById("meters-section")
                 ?.scrollIntoView({
                   behavior: "smooth",
-                })
+                });
+              setMobileMenuOpen(false);
+            }
             }
           >
             <Home size={19} />
@@ -443,8 +456,10 @@ const Dashboard = () => {
 
           <button
             className="nav-item"
-            onClick={() =>
-              navigate("/usage-history")
+            onClick={() => {
+              navigate("/usage-history");
+              setMobileMenuOpen(false);
+            }
             }
           >
             <TrendingUp size={19} />
@@ -467,6 +482,15 @@ const Dashboard = () => {
 
       </aside>
 
+      {mobileMenuOpen && (
+        <button
+          className="mobile-menu-overlay"
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* =====================================
           MAIN
       ===================================== */}
@@ -488,6 +512,16 @@ const Dashboard = () => {
               Monitor your electricity usage
             </p>
           </div>
+
+          <button
+            className="mobile-menu-button"
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
 
           <div className="header-actions">
 
@@ -1013,63 +1047,90 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    {/* BILL BREAKDOWN */}
+                    {/* BILL BREAKDOWN TOGGLE */}
 
                     {breakdown.length > 0 && (
-                      <div className="dashboard-bill-breakdown">
-                        <div className="dashboard-breakdown-header">
-                          <div className="dashboard-breakdown-title">
-                            <ReceiptText size={15} />
-                            <div>
-                              <strong>Bill Breakdown</strong>
-                              <span>
-                                {bill?.tariffType || "Current tariff"}
-                              </span>
-                            </div>
-                          </div>
+                      <>
+                        <button
+                          type="button"
+                          className={`bill-breakdown-toggle ${
+                            expandedBreakdowns[meter._id] ? "open" : ""
+                          }`}
+                          onClick={() =>
+                            setExpandedBreakdowns((prev) => ({
+                              ...prev,
+                              [meter._id]: !prev[meter._id],
+                            }))
+                          }
+                          aria-expanded={!!expandedBreakdowns[meter._id]}
+                        >
+                          <span className="bill-breakdown-toggle-left">
+                            <ReceiptText size={16} />
+                            <span>Bill Breakdown</span>
+                          </span>
+                          <span className="bill-breakdown-toggle-right">
+                            <small>{formatMoney(energyCharge) === "0.00" ? "Free / ₹0" : `₹${formatMoney(energyCharge)}`}</small>
+                            <ChevronDown size={17} />
+                          </span>
+                        </button>
 
-                          <CircleCheck size={17} />
-                        </div>
-
-                        <div className="dashboard-breakdown-free">
-                          <span>Free units</span>
-                          <strong>
-                            {freeUnits.toLocaleString("en-IN")} units
-                          </strong>
-                        </div>
-
-                        <div className="dashboard-breakdown-list">
-                          {breakdown.map((item, index) => {
-                            const units = getBreakdownUnits(item);
-                            const rate = getBreakdownRate(item);
-                            const amount = getBreakdownAmount(item);
-
-                            return (
-                              <div
-                                className="dashboard-breakdown-row"
-                                key={item?._id || item?.id || index}
-                              >
+                        {expandedBreakdowns[meter._id] && (
+                          <div className="dashboard-bill-breakdown">
+                            <div className="dashboard-breakdown-header">
+                              <div className="dashboard-breakdown-title">
+                                <ReceiptText size={15} />
                                 <div>
-                                  <strong>{getBreakdownLabel(item)}</strong>
+                                  <strong>Bill Breakdown</strong>
                                   <span>
-                                    {units.toLocaleString("en-IN")} units × ₹
-                                    {rate.toFixed(2)}
+                                    {bill?.tariffType || "Current tariff"}
                                   </span>
                                 </div>
-
-                                <strong>
-                                  ₹{formatMoney(amount)}
-                                </strong>
                               </div>
-                            );
-                          })}
-                        </div>
 
-                        <div className="dashboard-breakdown-total">
-                          <span>Energy Charge</span>
-                          <strong>₹{formatMoney(energyCharge)}</strong>
-                        </div>
-                      </div>
+                              <CircleCheck size={17} />
+                            </div>
+
+                            <div className="dashboard-breakdown-free">
+                              <span>Free units</span>
+                              <strong>
+                                {freeUnits.toLocaleString("en-IN")} units
+                              </strong>
+                            </div>
+
+                            <div className="dashboard-breakdown-list">
+                              {breakdown.map((item, index) => {
+                                const units = getBreakdownUnits(item);
+                                const rate = getBreakdownRate(item);
+                                const amount = getBreakdownAmount(item);
+
+                                return (
+                                  <div
+                                    className="dashboard-breakdown-row"
+                                    key={item?._id || item?.id || index}
+                                  >
+                                    <div>
+                                      <strong>{getBreakdownLabel(item)}</strong>
+                                      <span>
+                                        {units.toLocaleString("en-IN")} units × ₹
+                                        {rate.toFixed(2)}
+                                      </span>
+                                    </div>
+
+                                    <strong>
+                                      ₹{formatMoney(amount)}
+                                    </strong>
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            <div className="dashboard-breakdown-total">
+                              <span>Energy Charge</span>
+                              <strong>₹{formatMoney(energyCharge)}</strong>
+                            </div>
+                          </div>
+                        )}
+                      </>
                     )}
 
                     {/* CYCLE DATES */}
@@ -1169,11 +1230,11 @@ const Dashboard = () => {
             {readings.length > 5 && (
               <button
                 className="view-all-button"
-                onClick={() =>
-                  navigate(
-                    "/usage-history"
-                  )
-                }
+                onClick={() => {
+                  navigate("/usage-history");
+                  setMobileMenuOpen(false);
+                }}
+                
               >
                 View All
               </button>
